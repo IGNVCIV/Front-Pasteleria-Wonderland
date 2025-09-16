@@ -1,15 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import logo from './public/assets/img/logo/header'
 import './App.css'
-
 
 function App() {
   return (
     <header>
       <nav class="nav">
-        <img src="public/assets/img/logo/header" alt="Pastelería Wonderland" class="logo-img"></img>
+        <img src="/assets/img/Logos/Header.png" alt="Pastelería Wonderland" class="logo-img"></img>
           <ul class="menu">
           <li class="menu-item"><a href="index.html">Inicio</a></li>
 
@@ -36,5 +31,4 @@ function App() {
     </header>
   )
 }
-
 export default App
