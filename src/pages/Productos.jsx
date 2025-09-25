@@ -1,13 +1,16 @@
-import App from './App.jsx'
-import './style/style.css'
+import { useLocation } from "react-router-dom";
 
 function Productos() {
-    return(
-        <body>
-            <main class="container my-5">
-            <h2>Nuestros Productos</h2>
-            <div id="productos-container" class="row g-4"> </div>
-            </main>
-        </body>
-    )
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const categoria = queryParams.get("categoria");
+
+  return (
+    <main>
+      <h1>Productos</h1>
+      {categoria && <p>Mostrando categoría: {categoria}</p>}
+    </main>
+  );
 }
+
+export default Productos;
