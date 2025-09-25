@@ -1,34 +1,19 @@
-import './App.css'
+import './style/style.css'
+import { BrowserRouter, Route, Routes } from 'react-router'
+import Navbar from './components/Navbar.jsx'
+import Footer from './components/Footer.jsx'
 
 function App() {
-  return (
-    <header>
-      <nav class="nav">
-        <img src="/assets/img/Logos/Header.png" alt="Pastelería Wonderland" class="logo-img"></img>
-          <ul class="menu">
-          <li class="menu-item"><a href="index.html">Inicio</a></li>
+  return(
+    <>
+      <Navbar></Navbar>
+      <BrowserRouter>
+        <Routes>
 
-          <li class="menu-item has-children">
-              <a href="productos.html">Productos ▾</a>
-              <button class="submenu-toggle">▾</button>
-              <ul class="sub-menu">
-                <li class="menu-item"><a href="productos.html?categoria=Tortas Cuadradas">Tortas Cuadradas</a></li>
-                <li class="menu-item"><a href="productos.html?categoria=Tortas Circulares">Tortas Circulares</a></li>
-                <li class="menu-item"><a href="productos.html?categoria=Postres Individuales">Postres</a></li>
-                <li class="menu-item"><a href="productos.html?categoria=Pastelería Tradicional">Pastelería Tradicional</a></li>
-                <li class="menu-item"><a href="productos.html?categoria=Productos Sin Azúcar">Sin Azúcar</a></li>
-                <li class="menu-item"><a href="productos.html?categoria=Productos Sin Gluten">Sin Gluten</a></li>
-                <li class="menu-item"><a href="productos.html?categoria=Productos Veganos">Vegano</a></li>
-                <li class="menu-item"><a href="productos.html?categoria=Tortas Especiales">Tortas Especiales</a></li>
-                </ul>
-          </li>
-          <li class="menu-item"><a href="contacto.html">Contactanos</a></li>
-          <li class="menu-item"><a href="login.html">Mi Cuenta</a></li>
-          </ul>
-          
-          <a href="carrito.html" class="action-btn">Carrito de Compras</a>
-      </nav>
-    </header>
+        </Routes>
+      </BrowserRouter>
+      <Footer></Footer>
+    </>
   )
 }
 export default App

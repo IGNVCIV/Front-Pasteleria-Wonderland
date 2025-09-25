@@ -1,0 +1,20 @@
+@import 'components/alerts.css';
+@import 'components/cards.css';
+@import 'components/carousel.css';
+@import 'components/forms.css';
+@import 'components/siderbar.css';
+
+@import 'core/base.css';
+@import 'core/layout.css';
+@import 'core/utilities.css';
+@import 'core/variables.css';
+
+@import 'pages/carrito.css';
+@import 'pages/contacto.css';
+@import 'pages/detalle.css';
+@import 'pages/login.css';
+@import 'pages/personal.css';
+@import 'pages/productos.css';
+
+@import 'section/admin.css';
+@import 'section/home.css';

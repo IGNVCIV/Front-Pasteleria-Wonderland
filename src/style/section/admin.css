@@ -1,0 +1,81 @@
+html, body { height: 100%; }
+
+body{
+  --color-bg: #f2f2f2;
+  --color-light: #cccccc;
+  --color-mid: #a5a5a5;
+  --color-dark: #7f7f7f;
+  --color-deep: #595959;
+
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-dark);
+}
+
+/* El contenido crece y empuja el footer */
+main { flex: 1; }
+
+/* Títulos, botones, inputs, enlaces: sin #Admin */
+h1, h2, h3{
+  color: var(--color-deep);
+  margin-bottom: 1rem;
+}
+
+button{
+  background-color: var(--color-dark);
+  color: var(--color-bg);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+button:hover{ background-color: var(--color-mid); }
+
+input, select, textarea{
+  background-color: var(--color-light);
+  border: 1px solid var(--color-mid);
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: 100%;
+  color: var(--color-dark);
+}
+
+a{ color: var(--color-deep); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+#offcanvasRight { --bs-offcanvas-width: 360px; }
+
+/* Footer fijo al fondo por el flex del body */
+#site-footer-admin{
+  background: var(--color-light);
+  border-top: 1px solid var(--color-mid);
+  padding: var(--space-md, 1rem) var(--space-lg, 1.5rem);
+  text-align: center;
+  font-size: var(--font-size-sm, 0.95rem);
+  color: var(--color-dark);
+  margin-top: auto;   
+  width: 100%;
+}
+
+@media (min-width: 1400px) {
+  #tabHome .col-xl-11 { flex: 0 0 auto; width: 95%; }
+}
+
+#tabla-contactos td:nth-child(6){ white-space: normal; word-break: break-word; }
+
+@media (max-width: 576px){
+  #tabla-contactos th:nth-child(1), #tabla-contactos td:nth-child(1), 
+  #tabla-contactos th:nth-child(5), #tabla-contactos td:nth-child(5){ 
+    display:none;
+  }
+}
+@media (max-width: 768px){
+  #tabla-contactos th:nth-child(4), #tabla-contactos td:nth-child(4){ 
+    display:none;
+  }
+}
