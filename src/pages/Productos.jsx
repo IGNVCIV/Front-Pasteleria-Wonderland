@@ -4,6 +4,7 @@ import Data_Catalogo from "../lib/Data_Catalogo";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import '../style/style.css';
+{/*Agregar import : import ProductCard from "../components/ProductCard"; */}
 
 function Productos() {
   const location = useLocation();
@@ -16,7 +17,7 @@ function Productos() {
 
   useEffect(() => {
     const catalogo =
-      JSON.parse(localStorage.getItem("catalogoProductos")) || Data_Catalogo;
+      JSON.parse(localStorage.getItem("catalogoProductos")) || CATALOGO_INICIAL;
 
     const productosFiltrados = categoria
       ? catalogo.filter((p) => p.categoria === categoria)
