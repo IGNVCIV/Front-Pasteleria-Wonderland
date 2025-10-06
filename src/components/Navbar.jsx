@@ -10,7 +10,7 @@ function Navbar() {
             <li className="menu-item"><Link to="/home">Inicio</Link></li>
 
             <li className="menu-item has-children">
-              <Link to="/Productos">Productos ▾</Link>
+              <Link to="/productos">Productos ▾</Link>
               <button className="submenu-toggle">▾</button>
                 <ul className="sub-menu">
                 <li className="menu-item"><Link to="/productos?categoria=Tortas Cuadradas">Tortas Cuadradas</Link></li>
