@@ -1,0 +1,138 @@
+import { createRef, useState } from "react";
+import '../style/style.css';
+import Navbar from "../components/Navbar";
+import Footer from '../components/Footer.jsx'
+
+function Contacto() {
+  const [form, setForm] = useState({ nombre:"", correo:"", orden:"", mensaje:"" });
+  const [alert, setAlert] = useState(null);
+  const formRef = createRef();
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleReset = () => {
+    setForm({ nombre: "", correo: "", orden: "", mensaje: "" });
+    setAlert(null);
+    if (formRef.current) {
+      formRef.current.reset();
+      formRef.current.classList.remove("was-validated"); 
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    formRef.current.classList.add('was-validated');
+    if (!form.nombre.trim()) return setAlert("Ingresa tu nombre");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.correo)) return setAlert("Correo inválido");
+    if (form.mensaje.trim().length < 5) return setAlert("Escribe un mensaje más largo");
+
+    // Guardar en localStorage
+    const lista = JSON.parse(localStorage.getItem("pw_contactos") || "[]");
+    lista.push({ ...form, fecha: new Date().toISOString() });
+    localStorage.setItem("pw_contactos", JSON.stringify(lista));
+
+    setAlert("¡Mensaje enviado! Te responderemos pronto.");
+    setForm({ nombre:"", correo:"", orden:"", mensaje:"" });
+  };
+    
+  return (
+    <>
+    <Navbar />
+    <main>
+        <div id="banner-contacto">
+          <img src="/assets/img/Banner/contactanos.webp" alt="Pastelería Wonderland" className="banner" />
+          <p id="letra-b-contacto">Contáctanos</p>
+        </div>
+
+        <section className="container my-4" id="contacto-card">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-10 col-lg-8">
+              <div className="card contacto-card border-0">
+                <div className="card-body p-4 p-md-5">
+                  <h2 className="section-title text-center mb-2">Hablemos</h2>
+                  <span className="title-underline mx-auto d-block mb-3"></span>
+                  <p className="text-center soft-muted mb-4">
+                    Canal de contacto para <strong>pedidos grandes</strong>, <strong>ventas corporativas</strong> y 
+                    <strong>soporte de pedidos</strong>. Déjanos tus datos y te responderemos a la brevedad.
+                  </p>
+                    
+                  {alert && <div className="custom-alert.success">{alert}</div>}
+
+                  <form id="form-contacto" noValidate onSubmit={handleSubmit} ref={formRef}>
+                    <div className="mb-3">
+                      <label htmlFor="nombre" className="form-label">Nombre completo</label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        id="nombre" 
+                        name="nombre"
+                        placeholder="Tu nombre" 
+                        value={form.nombre}
+                        onChange={handleChange}
+                        required 
+                      />
+                      <div className="invalid-feedback">Ingresa tu nombre.</div>
+                    </div>
+
+                    <div className="mb-3">
+                      <label htmlFor="correo" className="form-label">Correo electrónico</label>
+                      <input 
+                        type="email" 
+                        className="form-control" 
+                        id="correo" 
+                        name="correo"
+                        placeholder="ejemplo@correo.cl"
+                        value={form.correo}
+                        onChange={handleChange}
+                        required 
+                      />
+                      <div className="invalid-feedback">Ingresa un correo válido.</div>
+                    </div>
+
+                    <div className="mb-3">
+                      <label htmlFor="orden" className="form-label">
+                        Número de orden <span className="soft-muted">(opcional)</span>
+                      </label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        id="orden" 
+                        name="orden"
+                        placeholder="Si tu mensaje es por un pedido, incluye el número (ej. #12345)"
+                        value={form.orden}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    
+                    <div className="mb-3">
+                      <label htmlFor="mensaje" className="form-label">Mensaje</label>
+                      <textarea 
+                        className="form-control" 
+                        id="mensaje" 
+                        name="mensaje" 
+                        rows={5}
+                        placeholder="Cuéntanos en qué podemos ayudarte."
+                        value={form.mensaje}
+                        onChange={handleChange}
+                        required></textarea>
+                      <div className="invalid-feedback">Escribe un mensaje.</div>
+                    </div>
+                    
+                    <div className="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                      <button type="reset" className="btn btn-light btn-sm" onClick={handleReset}>Limpiar</button>
+                      <button type="submit" className="btn btn-success btn-sm">Enviar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+     </main>  
+     <Footer />  
+    </>
+  )
+}
+export default Contacto;

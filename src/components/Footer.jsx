@@ -1,4 +1,4 @@
-import '../style/style.css'
+import '../style/style.css';
 import { useState } from "react";
 
 function Footer() {
@@ -49,7 +49,7 @@ function Footer() {
 
                 <div className="footer-right">
                 <p className="footer-cta">Únete a nuestro club</p>
-                <form id="clubw_email_form" class="footer-form" action="#">
+                <form id="clubw_email_form" className="footer-form" action="#">
                     <input id="email" 
                     type="email" 
                     name="email" 
@@ -57,7 +57,7 @@ function Footer() {
                     value={correo}
                     onChange={(e) => setCorreo(e.target.value)}
                     required/>
-                    <button type="submit" class="btn-primario">Unirme</button>
+                    <button type="submit" className="btn-primario">Unirme</button>
                 </form>
                 </div>
             </div>

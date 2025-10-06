@@ -1,4 +1,4 @@
-import '../style/style.css'
+import '../style/style.css';
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -7,7 +7,7 @@ function Navbar() {
       <nav className="nav">
         <img src="/assets/img/Logos/Header.png" alt="Pastelería Wonderland" className="logo-img" />
           <ul className="menu">
-            <li className="menu-item"><Link to="/Home">Inicio</Link></li>
+            <li className="menu-item"><Link to="/home">Inicio</Link></li>
 
             <li className="menu-item has-children">
               <Link to="/Productos">Productos ▾</Link>
@@ -23,7 +23,7 @@ function Navbar() {
                 <li className="menu-item"><Link to="/productos?categoria=Tortas Especiales">Tortas Especiales</Link></li>
                 </ul>
           </li>
-          <li className="menu-item"><Link to="/Contacto">Contáctanos</Link></li>
+          <li className="menu-item"><Link to="/contacto">Contáctanos</Link></li>
           <li className="menu-item"><Link to="/login">Mi Cuenta</Link></li>
           </ul>
           

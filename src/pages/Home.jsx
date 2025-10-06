@@ -1,4 +1,4 @@
-import '../style/style.css'
+import '../style/style.css';
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer.jsx'
@@ -31,7 +31,7 @@ function Home(){
                 </div>
                 </div>
                 <div className="carousel-item">
-                <img src="/assets/img/Carousel/carousel-3.webp" class="d-block" alt="Selección de tortas artesanales"/>
+                <img src="/assets/img/Carousel/carousel-3.webp" className="d-block" alt="Selección de tortas artesanales"/>
                 <div className="carousel-caption d-none d-md-block">
                     <h5>Tu torta, a tu manera</h5>
                     <p>Variedad de sabores únicos para cada ocasión especial.</p>
@@ -64,7 +64,7 @@ function Home(){
         <article id="Noticia" aria-labelledby="tit-inspira">
             <header>
             <h2 id="tit-inspira">Técnica internacional que inspira nuestra pastelería</h2>
-            <p className="meta"><time datetime="2025-09-06">6 de septiembre de 2025</time> · Inspiración profesional</p>
+            <p className="meta"><time dateTime="2025-09-06">6 de septiembre de 2025</time> · Inspiración profesional</p>
             </header>
             <p>En Pastelería <strong>Wonderland</strong> creemos en la formación continua…</p>
             <ul className="resumen">

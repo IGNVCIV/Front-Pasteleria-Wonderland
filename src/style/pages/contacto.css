@@ -56,12 +56,12 @@
 }
 /* ===== Contacto (card) ===== */
 #contacto-card .contacto-card{
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border);
-  background: #fff;
-  /* pequeño acento lateral */
-  border-left: 6px solid var(--color-primary);
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md)!important;
+  border: 1px solid var(--color-border)!important;
+  background: #fff!important;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 #contacto-card .section-title{
@@ -115,4 +115,19 @@
   height: 40px;
   padding: 0 16px;
   font-weight: 600;
+}
+
+/* 🔧 Evita que los inputs se pinten rojos automáticamente */
+input:invalid,
+textarea:invalid,
+select:invalid {
+  border-color: #dee2e6 !important; /* el gris original de Bootstrap */
+  box-shadow: none !important;
+}
+
+/* 🔧 Cuando el formulario tenga .was-validated, sí mostramos error */
+.was-validated input:invalid,
+.was-validated textarea:invalid,
+.was-validated select:invalid {
+  border-color: #dc3545 !important;
 }
