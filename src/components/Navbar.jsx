@@ -15,11 +15,11 @@ function Navbar() {
                 <ul className="sub-menu">
                 <li className="menu-item"><Link to="/productos?categoria=Tortas Cuadradas">Tortas Cuadradas</Link></li>
                 <li className="menu-item"><Link to="/productos?categoria=Tortas Circulares">Tortas Circulares</Link></li>
-                <li className="menu-item"><Link to="/productos?categoria=Postres">Postres</Link></li>
+                <li className="menu-item"><Link to="/productos?categoria=Postres Individuales">Postres</Link></li>
                 <li className="menu-item"><Link to="/productos?categoria=Pastelería Tradicional">Pastelería Tradicional</Link></li>
-                <li className="menu-item"><Link to="/productos?categoria=Sin Ázucar">Sin Azúcar</Link></li>
-                <li className="menu-item"><Link to="/productos?categoria=Sin Gluten">Sin Gluten</Link></li>
-                <li className="menu-item"><Link to="/productos?categoria=Veganos">Vegano</Link></li>
+                <li className="menu-item"><Link to="/productos?categoria=Productos Sin Ázucar">Sin Azúcar</Link></li>
+                <li className="menu-item"><Link to="/productos?categoria=Productos Sin Gluten">Sin Gluten</Link></li>
+                <li className="menu-item"><Link to="/productos?categoria=Productos Veganos">Vegano</Link></li>
                 <li className="menu-item"><Link to="/productos?categoria=Tortas Especiales">Tortas Especiales</Link></li>
                 </ul>
           </li>

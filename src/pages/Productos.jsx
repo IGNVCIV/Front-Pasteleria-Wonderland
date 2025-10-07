@@ -41,11 +41,27 @@ function Productos() {
   return (
     <>
       <Navbar />
+      <div id="banner-contacto">
+          <img src="public/assets/img/Banner/productos.webp" alt="Pastelería Wonderland" className="banner opacity-75" />
+          <p id="letra-b-producto">{categoria ? categoria : "Nuestros Productos"}</p>
+      </div>
+              <div className="d-flex justify-content-center mt-3 gap-2">
+          <button
+            className="btn btn-outline-secondary btn-sm"
+            onClick={anteriorPagina}
+            disabled={paginaActual === 1}
+          >
+            &laquo; Anterior
+          </button>
+          <button
+            className="btn btn-outline-secondary btn-sm"
+            onClick={siguientePagina}
+            disabled={paginaActual === totalPaginas}
+          >
+            Siguiente &raquo;
+          </button>
+        </div>
       <main className="container mt-4">
-        <h2 className="mb-4 text-center">
-          {categoria ? categoria : "Nuestros Productos"}
-        </h2>
-
         <div
           id="productos-container"
           className="row g-3"
@@ -71,18 +87,18 @@ function Productos() {
 
         <div className="d-flex justify-content-center mt-3 gap-2">
           <button
-            className="btn btn-outline-secondary"
+            className="btn btn-outline-secondary btn-sm"
             onClick={anteriorPagina}
             disabled={paginaActual === 1}
           >
-            Anterior
+            &laquo; Anterior
           </button>
           <button
-            className="btn btn-outline-secondary"
+            className="btn btn-outline-secondary btn-sm"
             onClick={siguientePagina}
             disabled={paginaActual === totalPaginas}
           >
-            Siguiente
+            Siguiente &raquo;
           </button>
         </div>
       </main>

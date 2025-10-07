@@ -1,3 +1,33 @@
+#letra-b-producto{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin: 0;
+  font-family: "Marcellus", serif;           /* o la que uses */
+  font-weight: 700;                          /* negrita */
+  font-size: clamp(20px, 4vw, 45px);
+  letter-spacing: .03em;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;                  /* opcional */
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
+  padding: .25em .7em;
+  border-radius: 12px;
+  background: rgba(0,0,0,.18);                /* leve fondo detrás del texto */
+  backdrop-filter: blur(1px);                 /* opcional: mejora contraste */
+}
+
+#letra-b-producto::after{
+  content: "";
+  display: block;
+  width: 88px;
+  height: 4px;
+  margin: .5rem auto 0;
+  border-radius: 4px;
+  background: var(--color-primary, #cb997e);
+}
+
 #productos-container .card.h-100.shadow-sm
 /* Grid de productos: misma lógica que "Top ventas" */
 #productos-container .card{
