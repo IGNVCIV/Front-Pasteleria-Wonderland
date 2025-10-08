@@ -26,8 +26,7 @@ function Navbar() {
           <li className="menu-item"><Link to="/contacto">Contáctanos</Link></li>
           <li className="menu-item"><Link to="/login">Mi Cuenta</Link></li>
           </ul>
-          
-          <Link to="/Carrito" className="action-btn">Carrito de Compras</Link>
+          <Link to="/carro-de-compras" className="action-btn">Carro de Compras</Link>
       </nav>
     </header>
   )

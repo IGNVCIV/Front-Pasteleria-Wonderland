@@ -1,6 +1,6 @@
 import Data_Catalogo from "../lib/Data_Catalogo.jsx"
  
-function ProductCard({ producto }) {
+function ProductCard({ producto, onAddToCart }) {
   return (
     <div className="producto-card card shadow-sm">
       <img
@@ -11,7 +11,12 @@ function ProductCard({ producto }) {
       <div className="card-body text-center">
         <h5 className="card-title">{producto.nombre}</h5>
         <p className="card-text fw-bold">${producto.precio.toLocaleString()}</p>
-        <small className="text-muted">{producto.categoria}</small>
+        <button
+          className="btn btn-primary mt-auto"
+          onClick={onAddToCart}
+        >
+          Agregar al carrito
+        </button>
       </div>
     </div>
   );

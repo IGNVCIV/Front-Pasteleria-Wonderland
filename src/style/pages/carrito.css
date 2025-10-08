@@ -48,6 +48,7 @@
   --bs-table-striped-bg: color-mix(in srgb, var(--color-border) 18%, #fff);
   --bs-table-hover-bg: color-mix(in srgb, var(--color-primary) 10%, #fff);
 }
+
 #Carrito .table thead{
   background: var(--color-primary);
   color: #fff;
@@ -70,14 +71,6 @@
 /* --------------------------------
    Controles de cantidad
 --------------------------------- */
-/* Contenedor para que no salte de línea */
-.cantidad-td{
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 /* Reestiliza tus mismos botones Bootstrap pequeños */
 .cantidad-btn{
   width:36px; height:36px; padding:0;

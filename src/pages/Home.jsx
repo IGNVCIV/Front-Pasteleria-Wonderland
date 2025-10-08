@@ -79,7 +79,7 @@ function Home(){
                       <div className="card-body d-flex flex-column">
                         <h5 className="card-title">{prod.nombre}</h5>
                         <p className="card-text text-muted mb-2">${prod.precio.toLocaleString("es-CL")}</p>
-                        <p className="small text-success mb-3">Ventas: {prod.ventas}</p>
+                        <p className="small mb-3" style={{ color: "#a5a58d"}} >Ventas: {prod.ventas}</p>
                         <Link to={`/productos#${prod.id}`} className="btn btn-sm btn-primary mt-auto">
                           Ver producto
                         </Link>
