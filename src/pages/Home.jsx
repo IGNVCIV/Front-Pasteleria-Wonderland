@@ -1,11 +1,25 @@
 import '../style/style.css';
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Catalogo, { CATALOGO_INICIAL } from "../lib/Data_Catalogo";
+import ProductCard from "../components/ProductCard";
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer.jsx';
 import { Carousel } from "bootstrap";
 
-function Home(){
-    
+function Home(){    
+    const { catalogo } = Catalogo();
+    const [topProductos, setTopProductos] = useState([]);
+
+  useEffect(() => {
+    if (catalogo && catalogo.length > 0) {
+    const masVendidos = [...catalogo]
+    .sort((a, b) => b.ventas - a.ventas)
+    .slice(0, 4); 
+    setTopProductos(masVendidos);
+    }
+  }, [catalogo]);
+
     return (
     <>
         <Navbar />
@@ -53,14 +67,31 @@ function Home(){
             <Link to="/productos">Revisa nuestra carta</Link>
         </section>
 
-        <section className="productos-mas-vendidos section-pad">
-            <div className="container">
-            <h2 id="top-ventas-letra">Productos más vendidos</h2>
-            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center"
-                    id="top-ventas-container">
-
+        <section className="productos-mas-vendidos py-5">
+          <div className="container text-center">
+            <h2 className="mb-4" id="top-ventas-letra">Productos de la semana</h2>
+            <div className="row justify-content-center g-4">
+              {topProductos.length > 0 ? (
+                topProductos.map((prod) => (
+                  <div key={prod.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div className="card h-100 shadow-sm border-0">
+                      <img src={prod.imagen} className="card-img-top" alt={prod.nombre} />
+                      <div className="card-body d-flex flex-column">
+                        <h5 className="card-title">{prod.nombre}</h5>
+                        <p className="card-text text-muted mb-2">${prod.precio.toLocaleString("es-CL")}</p>
+                        <p className="small text-success mb-3">Ventas: {prod.ventas}</p>
+                        <Link to={`/productos#${prod.id}`} className="btn btn-sm btn-primary mt-auto">
+                          Ver producto
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-muted">Cargando productos...</p>
+              )}
             </div>
-            </div>
+          </div>
         </section>
 
         <article id="Noticia" aria-labelledby="tit-inspira">
