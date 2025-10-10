@@ -1,8 +1,17 @@
-import Data_Catalogo from "../lib/Data_Catalogo.jsx"
- 
+import Data_Catalogo from "../lib/Data_Catalogo.jsx";
+import { useNavigate } from "react-router-dom"; 
+import DetalleProducto from "../pages/DetalleProducto.jsx";
+
 function ProductCard({ producto, onAddToCart }) {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/producto/${producto.id}`);
+  };
+
   return (
-    <div className="producto-card card shadow-sm">
+    <div className="producto-card card shadow-sm" style={{ cursor: "pointer" }}
+      onClick={handleCardClick}>
       <img
         src={producto.imagen}
         alt={producto.nombre}
@@ -13,7 +22,10 @@ function ProductCard({ producto, onAddToCart }) {
         <p className="card-text fw-bold">${producto.precio.toLocaleString()}</p>
         <button
           className="btn btn-primary mt-auto"
-          onClick={onAddToCart}
+          onClick={(e) => {
+            e.stopPropagation(); 
+            onAddToCart(producto); 
+          }}
         >
           Agregar al carrito
         </button>

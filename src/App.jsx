@@ -1,22 +1,33 @@
 import './style/style.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import Productos from './pages/Productos.jsx'
-import Contacto from './pages/Contacto.jsx'
-import Carro from './pages/Carro.jsx'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import React, { Suspense, lazy } from "react";
+const Home = lazy(() => import("./pages/Home.jsx"));
+const Productos = lazy(() => import("./pages/Productos.jsx"));
+const Contacto = lazy(() => import("./pages/Contacto.jsx"));
+const Carro = lazy(() => import("./pages/Carro.jsx"));
+const DetalleProducto = lazy(() => import("./pages/DetalleProducto.jsx"));
 
 function App() {
-  return(
-    <>
-      <BrowserRouter>
+  return (
+    <BrowserRouter>
+      <Suspense fallback={
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+      }>
         <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/productos" element={<Productos />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/carro-de-compras" element={<Carro />} />
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/productos" element={<Productos />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/carro-de-compras" element={<Carro />} />
+          <Route path="/producto/:id" element={<DetalleProducto />} />
         </Routes>
-      </BrowserRouter>
-    </>
-  )
+      </Suspense>
+    </BrowserRouter>
+  );
 }
-export default App
+
+export default App;

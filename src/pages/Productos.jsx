@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Catalogo, { CATALOGO_INICIAL } from "../lib/Data_Catalogo";
 import ProductCard from "../components/ProductCard";
+import DetalleProducto from "./DetalleProducto";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import '../style/style.css';
@@ -18,22 +19,47 @@ function Productos() {
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 8;
 
+   const [loading, setLoading] = useState(true); 
+
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [cantidad, setCantidad] = useState(1);
   const [mostrarModal, setMostrarModal] = useState(false);
 
-  useEffect(() => {
-    const productosFiltrados = categoria
-      ? catalogo.filter((p) => p.categoria === categoria)
-      : catalogo;
-    setProductos(productosFiltrados);
-    setPaginaActual(1);
+    useEffect(() => {
+    setLoading(true); 
+    const timer = setTimeout(() => { 
+      const productosFiltrados = categoria
+        ? catalogo.filter((p) => p.categoria === categoria)
+        : catalogo;
+      setProductos(productosFiltrados);
+      setPaginaActual(1);
+      setLoading(false); 
+    }, 800); 
+    return () => clearTimeout(timer);
   }, [categoria, catalogo]);
 
   const indexInicio = (paginaActual - 1) * productosPorPagina;
   const indexFin = indexInicio + productosPorPagina;
   const productosPagina = productos.slice(indexInicio, indexFin);
   const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+
+  const Placeholder = () => (
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+      <div className="card placeholder-glow" style={{ width: '18rem', height: '300px' }}>
+        <div className="card-img-top placeholder" style={{ height: '180px' }}></div>
+        <div className="card-body">
+          <h5 className="card-title">
+            <span className="placeholder col-6"></span>
+          </h5>
+          <p className="card-text">
+            <span className="placeholder col-7"></span>
+            <span className="placeholder col-4"></span>
+          </p>
+          <a className="btn btn-primary disabled placeholder col-6"></a>
+        </div>
+      </div>
+    </div>
+  );  
 
   const siguientePagina = () => {
     if (paginaActual < totalPaginas) setPaginaActual(paginaActual + 1);
@@ -82,10 +108,16 @@ function Productos() {
     <>
       <Navbar />
       <div id="banner-contacto">
-          <img src="public/assets/img/Banner/productos.webp" alt="Pastelería Wonderland" className="banner opacity-75" />
-          <p id="letra-b-producto">{categoria ? categoria : "Nuestros Productos"}</p>
+        <img
+          src="/assets/img/Banner/productos.webp"
+          alt="Pastelería Wonderland"
+          className="banner opacity-75"
+        />
+        <p id="letra-b-producto">{categoria ? categoria : "Nuestros Productos"}</p>
       </div>
-              <div className="d-flex justify-content-center mt-3 gap-2">
+
+      {!loading && (
+        <div className="d-flex justify-content-center mt-4 mb-2 gap-2">
           <button
             className="btn btn-outline-secondary btn-sm"
             onClick={anteriorPagina}
@@ -101,45 +133,43 @@ function Productos() {
             Siguiente &raquo;
           </button>
         </div>
-      <main className="container mt-4">
+      )}
+
+      <main className="container mt-4">       
         <div
           id="productos-container"
-          className="row g-3"
-          style={{
-            maxHeight: "70vh",
-            overflowY: "auto",
-            paddingRight: "10px",
-          }}>
-          {productosPagina.length > 0 ? (
-            productosPagina.map((prod) => (
-              <div
-                key={prod.id}
-                className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex"
-              >
-                <ProductCard producto={prod} onAddToCart={() => abrirModal(prod)} />
-              </div>
-            ))
-          ) : (
-            <p>No hay productos disponibles.</p>
-          )}
+          className="row g-3 justify-content-center"
+          style={{ maxHeight: "70vh", overflowY: "auto", paddingRight: "10px" }}
+        >
+          {loading
+            ? Array.from({ length: 8 }).map((_, i) => <Placeholder key={i} />)
+            : productosPagina.length > 0
+            ? productosPagina.map((prod) => (
+                <div key={prod.id} className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+                  <ProductCard producto={prod} onAddToCart={() => abrirModal(prod)} />
+                </div>
+              ))
+            : <p>No hay productos disponibles.</p>}
         </div>
 
-        <div className="d-flex justify-content-center mt-3 gap-2">
-          <button
-            className="btn btn-outline-secondary btn-sm"
-            onClick={anteriorPagina}
-            disabled={paginaActual === 1}
-          >
-            &laquo; Anterior
-          </button>
-          <button
-            className="btn btn-outline-secondary btn-sm"
-            onClick={siguientePagina}
-            disabled={paginaActual === totalPaginas}
-          >
-            Siguiente &raquo;
-          </button>
-        </div>
+        {!loading && (
+          <div className="d-flex justify-content-center mt-3 gap-2">
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              onClick={anteriorPagina}
+              disabled={paginaActual === 1}
+            >
+              &laquo; Anterior
+            </button>
+            <button
+              className="btn btn-outline-secondary btn-sm"
+              onClick={siguientePagina}
+              disabled={paginaActual === totalPaginas}
+            >
+              Siguiente &raquo;
+            </button>
+          </div>
+        )}
       </main>
 
       {mostrarModal && (
@@ -158,9 +188,9 @@ function Productos() {
                   className="btn-close"
                   onClick={() => {
                     setMostrarModal(false);
-                    document.body.classList.remove("modal-open"); // cierra el modal correctamente
+                    document.body.classList.remove("modal-open");
                     const backdrop = document.querySelector(".modal-backdrop");
-                    if (backdrop) backdrop.remove(); // elimina fondo gris invisible
+                    if (backdrop) backdrop.remove();
                   }}
                 ></button>
               </div>

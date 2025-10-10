@@ -65,7 +65,7 @@ function Carro(){
     return(
         <>
             <Navbar />
-            <img src="public/assets/img/Banner/pedido.webp" alt="Pastelería Wonderland" className="banner"></img>
+            <img src="/assets/img/Banner/pedido.webp" alt="Pastelería Wonderland" className="banner"></img>
 
             <div className="custom-alert soft" >
                 ¿Eres cliente? <Link to="/login" className="alert-link">Haz clic aquí para acceder</Link>
@@ -109,7 +109,7 @@ function Carro(){
                     </tbody>
               </table>
               <div className="text-end mt-3">
-                <Link to="/productos" className="btn btn-primary">Seguir Comprando</Link>
+                <Link to="/productos" className="btn btn-primary text-decoration-none">Seguir Comprando</Link>
                 <button type="reset" className="btn btn-danger" onClick={handleReset}>Eliminar carrito</button>
                 <button type="success"className="btn btn-success">Finalizar Compra</button>
                 <h4 className="mt-3 fw-bold text-secondary">Total: ${cartTotal.toLocaleString("es-CL")}</h4>
