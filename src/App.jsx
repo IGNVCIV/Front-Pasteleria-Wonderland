@@ -6,6 +6,8 @@ const Productos = lazy(() => import("./pages/Productos.jsx"));
 const Contacto = lazy(() => import("./pages/Contacto.jsx"));
 const Carro = lazy(() => import("./pages/Carro.jsx"));
 const DetalleProducto = lazy(() => import("./pages/DetalleProducto.jsx"));
+import Login from './pages/Login.jsx'
+import Admin from './pages/Admin.jsx'; 
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/carro-de-compras" element={<Carro />} />
           <Route path="/producto/:id" element={<DetalleProducto />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
