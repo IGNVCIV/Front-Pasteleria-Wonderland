@@ -6,8 +6,8 @@ const Productos = lazy(() => import("./pages/Productos.jsx"));
 const Contacto = lazy(() => import("./pages/Contacto.jsx"));
 const Carro = lazy(() => import("./pages/Carro.jsx"));
 const DetalleProducto = lazy(() => import("./pages/DetalleProducto.jsx"));
-import Login from './pages/Login.jsx'
-import Admin from './pages/Admin.jsx'; 
+const Login = lazy(() => import("./pages/Login.jsx"));
+const Admin = lazy(() => import("./pages/Admin.jsx"));
 
 function App() {
   return (
