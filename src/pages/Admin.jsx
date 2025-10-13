@@ -223,7 +223,7 @@ function Admin() {
           <section className="card shadow-sm p-3 mt-3">
             <h5>{empleadoEdit ? "Editar Empleado" : "Agregar Empleado"}</h5>
             <form onSubmit={handleGuardar}>
-              {/* --- campos del formulario, intactos --- */}
+          
               <div className="row g-2">
                 <div className="col-md-4">
                   <label className="form-label">RUT</label>
