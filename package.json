@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "node ./node_modules/vite/bin/vite.js preview",
     "test": "vitest run",
+    "test-watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
