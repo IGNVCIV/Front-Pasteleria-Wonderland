@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer.jsx';
 import DetalleProducto from './DetalleProducto';
+import NoticiaHome from "../components/NoticiaHome.jsx";
 import { Carousel } from "bootstrap";
 
 function Home(){    
@@ -81,7 +82,7 @@ function Home(){
                         <h5 className="card-title">{prod.nombre}</h5>
                         <p className="card-text text-muted mb-2">${prod.precio.toLocaleString("es-CL")}</p>
                         <p className="small mb-3" style={{ color: "#a5a58d"}} >Ventas: {prod.ventas}</p>
-                        <Link to={`/producto/${prod.id}`} className="btn btn-sm btn-primary mt-auto">
+                        <Link to={`/producto/${prod.id}`} className="btn btn-sm btn-primary mt-auto text-decoration-none">
                         Ver producto
                         </Link>
                       </div>
@@ -124,6 +125,7 @@ function Home(){
             </footer>
         </article>
         </main>
+        <NoticiaHome />
         <Footer />
         </>    
     )

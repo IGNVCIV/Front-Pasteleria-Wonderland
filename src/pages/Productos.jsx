@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Catalogo, { CATALOGO_INICIAL } from "../lib/Data_Catalogo";
 import ProductCard from "../components/ProductCard";
 import DetalleProducto from "./DetalleProducto";
+import AlertaSimple from "../components/AlertaSimple.jsx";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import '../style/style.css';
@@ -18,14 +19,15 @@ function Productos() {
 
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 8;
-
-   const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true); 
 
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [cantidad, setCantidad] = useState(1);
   const [mostrarModal, setMostrarModal] = useState(false);
 
-    useEffect(() => {
+  const [alerta, setAlerta] = useState({ msg: "", type: "" });
+
+  useEffect(() => {
     setLoading(true); 
     const timer = setTimeout(() => { 
       const productosFiltrados = categoria
@@ -76,7 +78,13 @@ function Productos() {
   };
 
   const agregarAlCarrito = () => {
-    if (!productoSeleccionado) return;
+    if (!productoSeleccionado) {
+      setAlerta({
+        msg: "Debes seleccionar un producto antes de agregar al carrito.",
+        type: "warning",
+      });
+      return;
+    }
 
     const nuevoItem = {
       id: productoSeleccionado.id,
@@ -85,28 +93,30 @@ function Productos() {
       imagen: productoSeleccionado.imagen,
       cantidad: cantidad,
     };
-
     const carritoActual = JSON.parse(localStorage.getItem("cart")) || [];
-
     const existente = carritoActual.find((p) => p.id === nuevoItem.id);
     if (existente) {
       existente.cantidad = Math.min(existente.cantidad + cantidad, 8);
+      setAlerta({
+        msg: `${nuevoItem.nombre} ya estaba en el carrito. Cantidad actualizada.`,
+        type: "info",
+      });
     } else {
       carritoActual.push(nuevoItem);
+      setAlerta({
+        msg: `${nuevoItem.nombre} agregado al carrito.`,
+        type: "success",
+      });
     }
-
-    console.log("Carrito antes:", JSON.parse(localStorage.getItem("cart")) || []);
     localStorage.setItem("cart", JSON.stringify(carritoActual));
-    console.log("Carrito después:", carritoActual);
-
     setMostrarModal(false);
-    alert(`${nuevoItem.nombre} agregado al carrito`);
-    navigate("/carro-de-compras");
   };
+
 
   return (
     <>
       <Navbar />
+      <AlertaSimple message={alerta.msg} type={alerta.type} onClose={() => setAlerta({ msg: "", type: "" })} />
       <div id="banner-contacto">
         <img
           src="/assets/img/Banner/productos.webp"

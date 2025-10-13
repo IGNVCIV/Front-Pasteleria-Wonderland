@@ -51,3 +51,46 @@ main section.product-spotlight::after { content: none !important; }
 }
 .price-tag .currency{ font-size: .8em; color: var(--color-muted); }
 .price-tag .amount{ color: var(--color-primary); letter-spacing:.3px; }
+
+#Detalle-boton {
+  --color-success: #6b705c;  
+  --color-success-dark: #55624c; 
+
+  color: var(--color-success-dark);
+  border: 2px solid var(--color-success);
+  font-weight: 500;
+  background-color: transparent;
+  transition: all 0.25s ease;
+}
+
+#Detalle-boton i {
+  color: inherit;
+  transition: color 0.25s ease;
+}
+
+#Detalle-boton:hover,
+#Detalle-boton:focus {
+  background-color: var(--color-success);
+  color: #fff;
+  border-color: var(--color-success);
+}
+
+#Detalle-boton:hover i,
+#Detalle-boton:focus i {
+  color: #fff;
+}
+
+#Detalle-boton:active {
+  background-color: var(--color-success-dark);
+  border-color: var(--color-success-dark);
+  color: #fff;
+}
+
+#Detalle-boton:active i {
+  color: #fff;
+}
+
+#Detalle-boton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

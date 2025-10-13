@@ -1,7 +1,25 @@
 import '../style/style.css';
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Navbar() {
+    const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = storedCart.reduce((sum, item) => sum + item.cantidad, 0);
+    setCartCount(total);
+
+    // Si quieres actualizar dinámicamente cuando cambie el carrito
+    const handleStorageChange = () => {
+      const updated = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalUpdated = updated.reduce((sum, item) => sum + item.cantidad, 0);
+      setCartCount(totalUpdated);
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   return (
     <header>
       <nav className="nav">
@@ -26,7 +44,23 @@ function Navbar() {
           <li className="menu-item"><Link to="/contacto" className="text-decoration-none">Contáctanos</Link></li>
           <li className="menu-item"><Link to="/login" className="text-decoration-none">Mi Cuenta</Link></li>
           </ul>
-          <Link to="/carro-de-compras" className="action-btn text-decoration-none">Carro de Compras</Link>
+        <Link to="/carro-de-compras" className="action-btn text-decoration-none position-relative">
+          <i className="bi bi-cart3 me-2"></i>
+          Carro de Compras
+          {cartCount > 0 && (
+            <span
+              className="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              style={{
+                backgroundColor: "#b1976b", // 💛 dorado elegante
+                fontSize: "0.7rem",
+                color: "white",
+                fontWeight: "500",
+              }}
+            >
+              {cartCount}
+            </span>
+          )}
+        </Link>
       </nav>
     </header>
   )

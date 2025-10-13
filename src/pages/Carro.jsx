@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../style/style.css';
 import { Link } from "react-router-dom";
+import AlertaSimple from "../components/AlertaSimple.jsx";
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer.jsx';
 import CartItem from '../components/CartItem.jsx';
@@ -8,6 +9,7 @@ import CartItem from '../components/CartItem.jsx';
 function Carro(){
     const [cartItems, setCartItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
+    const [alerta, setAlerta] = useState({ msg: "", type: "" });
     
     const loadedOnce = useRef(false);
     useEffect(() => {
@@ -54,17 +56,35 @@ function Carro(){
 
     const removeProduct = (id) => {
         setCartItems((prev) => prev.filter((item) => item.id !== id));
+        setAlerta({ msg: "Producto eliminado del carrito", type: "info" });
     };
 
     const handleReset = () => {
+        if (cartItems.length === 0) {
+            setAlerta({ msg: "Tu carrito ya está vacío", type: "info" });
+            return;
+        }
+
         localStorage.removeItem("cart");
         setCartItems([]);
         setCartTotal(0);
-        alert("Carrito eliminado con éxito");
+        setAlerta({ msg: "Carrito eliminado con éxito", type: "success" });
     };
+
+    const handleFinalizarCompra = () => {
+    if (cartItems.length === 0) {
+        setAlerta({
+        msg: "Tu carrito está vacío. Agrega productos antes de comprar.",
+        type: "warning",
+        });
+        return;
+    }};
+
+
     return(
         <>
             <Navbar />
+            <AlertaSimple message={alerta.msg} type={alerta.type} onClose={() => setAlerta({ msg: "", type: "" })}/>
             <img src="/assets/img/Banner/pedido.webp" alt="Pastelería Wonderland" className="banner"></img>
 
             <div className="custom-alert soft" >
@@ -111,7 +131,7 @@ function Carro(){
               <div className="text-end mt-3">
                 <Link to="/productos" className="btn btn-primary text-decoration-none">Seguir Comprando</Link>
                 <button type="reset" className="btn btn-danger" onClick={handleReset}>Eliminar carrito</button>
-                <button type="success"className="btn btn-success">Finalizar Compra</button>
+                <button type="success"className="btn btn-success" onClick={handleFinalizarCompra}>Finalizar Compra</button>
                 <h4 className="mt-3 fw-bold text-secondary">Total: ${cartTotal.toLocaleString("es-CL")}</h4>
               </div>
             </div>

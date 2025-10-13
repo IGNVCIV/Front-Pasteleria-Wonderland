@@ -1,5 +1,6 @@
 import { createRef, useState } from "react";
 import '../style/style.css';
+import AlertaSimple from "../components/AlertaSimple.jsx";
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer.jsx'
 
@@ -7,6 +8,7 @@ function Contacto() {
   const [form, setForm] = useState({ nombre:"", correo:"", orden:"", mensaje:"" });
   const [alert, setAlert] = useState(null);
   const formRef = createRef();
+  const [alerta, setAlerta] = useState({ msg: "", type: "" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,17 +31,27 @@ function Contacto() {
     if (form.mensaje.trim().length < 5) return setAlert("Escribe un mensaje más largo");
 
     // Guardar en localStorage
-    const lista = JSON.parse(localStorage.getItem("pw_contactos") || "[]");
-    lista.push({ ...form, fecha: new Date().toISOString() });
-    localStorage.setItem("pw_contactos", JSON.stringify(lista));
+    const prev = JSON.parse(localStorage.getItem("pw_contactos") || "[]");
+    const last = prev[prev.length - 1];
+    if (last && Date.now() - new Date(last.fecha).getTime() < 60_000) {
+      setAlerta({
+        msg: "Ya enviaste un mensaje hace poco. Espera un momento antes de volver a intentarlo.",
+        type: "info",
+      });
+      return;
+    }
 
-    setAlert("¡Mensaje enviado! Te responderemos pronto.");
+    setAlerta({
+      msg: "¡Mensaje enviado! Te responderemos pronto.",
+      type: "success",
+    });
     setForm({ nombre:"", correo:"", orden:"", mensaje:"" });
   };
     
   return (
     <>
     <Navbar />
+    <AlertaSimple message={alerta.msg} type={alerta.type} onClose={() => setAlerta({ msg: "", type: "" })}/>
     <main>
         <div id="banner-contacto">
           <img src="/assets/img/Banner/contactanos.webp" alt="Pastelería Wonderland" className="banner" />
