@@ -42,7 +42,7 @@ function Navbar() {
                 </ul>
           </li>
           <li className="menu-item"><Link to="/contacto" className="text-decoration-none">Contáctanos</Link></li>
-          <li className="menu-item"><Link to="/login" className="text-decoration-none">Mi Cuenta</Link></li>
+          <li className="menu-item"><Link to="/inicio-sesion" className="text-decoration-none">Mi Cuenta</Link></li>
           </ul>
         <Link to="/carro-de-compras" className="action-btn text-decoration-none position-relative">
           <i className="bi bi-cart3 me-2"></i>

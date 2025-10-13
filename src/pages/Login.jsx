@@ -2,98 +2,92 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate();
-  const [usuario, setUsuario] = useState(null);
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
+  const [usuario, setUsuario] = useState(null);
+  const navigate = useNavigate();
 
-  // Cargar admin.json desde public
+  // Cargar usuario desde JSON
   useEffect(() => {
-    fetch("/admin.json")
-      .then((res) => res.json())
-      .then((data) => setUsuario(data))
-      .catch((err) => console.error("Error cargando usuario:", err));
-  }, []);
+  fetch("/assets/json/admin.json")
+    .then((res) => res.json())
+    .then((data) => setUsuario(data))
+    .catch((err) => console.error("Error cargando usuario:", err));
+}, []);
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
 
-    if (!usuario) {
-      setError("Usuario no cargado aún, intenta de nuevo.");
-      return;
-    }
+    if (!usuario) return;
 
+    // Validar usuario
     if (correo === usuario.correo && contrasena === usuario.contrasena) {
-      sessionStorage.setItem("rol", "admin");
       sessionStorage.setItem("authUser", correo);
-      navigate("/admin");
+      sessionStorage.setItem("rol", "admin");
+      navigate("/administracion");
     } else {
-      setError("Correo o contraseña incorrectos");
+      setError("Usuario o contraseña incorrectos");
     }
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100">
-      {/* Main */}
+    <div className="login-page vh-100 d-flex flex-column">
+      <header>
+        <nav className="nav">
+          <a href="/">
+            <img src="assets/img/logo.png" alt="Pastelería Wonderland" className="logo-img" />
+          </a>
+        </nav>
+      </header>
+
       <main className="flex-grow-1 d-flex justify-content-center align-items-center">
-        <div
-          className="card p-5 shadow"
-          style={{ minWidth: "380px", maxWidth: "450px", width: "100%" }}
-        >
-          <h2 className="text-center mb-4">Inicio de Sesión</h2>
+        <div className="card shadow" style={{ minWidth: "400px", maxWidth: "480px", width: "90%" }}>
+          <div className="card-body p-4">
+            <h2 className="mb-3">Inicio de Sesión<span className="title-underline"></span></h2>
 
-          {error && <div className="alert alert-danger">{error}</div>}
+            {error && <div className="alert alert-danger">{error}</div>}
 
-          <form onSubmit={handleLogin}>
-            <div className="mb-3">
-              <label htmlFor="correo" className="form-label">
-                Correo
-              </label>
-              <input
-                id="correo"
-                type="email"
-                className="form-control"
-                value={correo}
-                onChange={(e) => setCorreo(e.target.value)}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="contrasena" className="form-label">
-                Contraseña
-              </label>
-              <input
-                id="contrasena"
-                type="password"
-                className="form-control"
-                value={contrasena}
-                onChange={(e) => setContrasena(e.target.value)}
-                required
-              />
-            </div>
-            <div className="mb-3 text-end">
-              <a href="#">¿Olvidaste tu contraseña?</a>
-            </div>
-            <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-primary">
-                Acceder
-              </button>
-              <button type="button" className="btn btn-outline-secondary">
-                Crear cuenta
-              </button>
-            </div>
-          </form>
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="field mb-3">
+                <label className="label" htmlFor="correo">CORREO</label>
+                <input
+                  id="correo"
+                  type="email"
+                  className={`form-control ${error ? "is-invalid" : ""}`}
+                  value={correo}
+                  onChange={(e) => setCorreo(e.target.value)}
+                />
+              </div>
+
+              <div className="field mb-3">
+                <label className="label" htmlFor="contrasena">CONTRASEÑA</label>
+                <input
+                  id="contrasena"
+                  type="password"
+                  className={`form-control ${error ? "is-invalid" : ""}`}
+                  value={contrasena}
+                  onChange={(e) => setContrasena(e.target.value)}
+                />
+              </div>
+
+              <div className="links mb-3">
+                <a href="#">¿Olvidaste tu contraseña?</a>
+              </div>
+
+              <div className="actions d-flex gap-2">
+                <button className="btn btn-primary flex-grow-1" type="submit">Acceder</button>
+                <button className="btn btn-outline-secondary flex-grow-1" type="button">Crear cuenta</button>
+              </div>
+            </form>
+          </div>
         </div>
       </main>
 
-      {/* Footer */}
-      <footer
-        className="bg-light text-center py-3"
-        style={{ borderTop: "1px solid #ddd" }}
-      >
+      <footer id="site-footer-login" className="py-3 mt-auto text-center bg-light">
         <div className="footer-content">
-          <p className="mb-1">&copy; Pastelería Wonderland — 2025</p>
+          <p>&copy; Pastelería Wonderland — 2025</p>
           <a href="#">Política de privacidad</a>
         </div>
       </footer>

@@ -449,9 +449,9 @@ function Admin() {
         <div className="offcanvas-body d-flex flex-column p-0">
           <div className="px-3 pt-2 pb-1 small text-uppercase text-muted">Inicio</div>
           <nav className="list-group list-group-flush mb-2">
-            <a className="list-group-item list-group-item-action" href="/admin">
+            <Link to="/administracion" className="list-group-item list-group-item-action">
               <i className="bi bi-house-door me-2"></i> Home
-            </a>
+            </Link>
           </nav>
 
           <div className="px-3 pt-2 pb-1 small text-uppercase text-muted">Gestión de productos</div>

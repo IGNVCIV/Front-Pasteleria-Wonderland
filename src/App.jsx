@@ -26,8 +26,8 @@ function App() {
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/carro-de-compras" element={<Carro />} />
           <Route path="/producto/:id" element={<DetalleProducto />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/inicio-sesion" element={<Login />} />
+          <Route path="/administracion" element={<Admin />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
