@@ -9,6 +9,7 @@ const DetalleProducto = lazy(() => import("./pages/DetalleProducto.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
 
+
 function App() {
   return (
     <BrowserRouter>

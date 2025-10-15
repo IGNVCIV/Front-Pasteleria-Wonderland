@@ -1,0 +1,18 @@
+/* PerfilAdmin.css */
+.btn-skin {
+  background: #f5d6c6;  /* color tipo piel */
+  color: #333;
+  border: 1px solid #e0bfa6;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.15s ease;
+}
+
+.btn-skin:hover {
+  background: #eecfb8;
+  border-color: #d9a78f;
+  filter: brightness(0.97);
+}
