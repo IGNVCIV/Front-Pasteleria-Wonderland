@@ -7,7 +7,7 @@ export default function NoticiaHome() {
 
   useEffect(() => {
     const API_KEY = "71a7428258ef478daa17af3c1b1ef133";
-    const URL = `https://newsapi.org/v2/everything?q=(pastelería OR repostería OR "tartas artesanales" OR "postres dulces") -pizza -pizzería -panadería -salado&language=es&sortBy=publishedAt&apiKey=${API_KEY}`;
+    const URL = `https://newsapi.org/v2/everything?q=repostería&language=es&sortBy=publishedAt&apiKey=${API_KEY}`;
 
     const obtenerNoticias = async () => {
       try {
