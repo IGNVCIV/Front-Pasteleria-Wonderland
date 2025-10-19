@@ -60,7 +60,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          7
+          42
            unidades
         </p>
       </div>
@@ -105,7 +105,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          43
+          40
            unidades
         </p>
       </div>
@@ -150,7 +150,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          12
+          35
            unidades
         </p>
       </div>
@@ -195,7 +195,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          40
+          17
            unidades
         </p>
       </div>
@@ -240,7 +240,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          21
+          36
            unidades
         </p>
       </div>
@@ -285,7 +285,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          19
+          56
            unidades
         </p>
       </div>
@@ -330,7 +330,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          31
+          55
            unidades
         </p>
       </div>
@@ -375,7 +375,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          50
+          20
            unidades
         </p>
       </div>
@@ -420,7 +420,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          47
+          27
            unidades
         </p>
       </div>
@@ -465,7 +465,7 @@ exports[`TopProductos Component > coincide con el snapshot 1`] = `
             Ventas semanales:
           </strong>
            
-          38
+          14
            unidades
         </p>
       </div>

@@ -9,9 +9,8 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const forceLogin = params.get("forceLogin"); // detecta si se fuerza login
+  const forceLogin = params.get("forceLogin");
 
-  // Credenciales válidas (demo)
   const usuario = {
     correo: "admin@wonderland.cl",
     contrasena: "clave123",
@@ -21,7 +20,6 @@ function Login() {
     const usuarioActivo = localStorage.getItem("usuarioActivo");
     const rol = localStorage.getItem("rol");
 
-    // Redirige solo si hay sesión y NO se fuerza el login
     if (!forceLogin && usuarioActivo && rol === "admin") {
       navigate("/administracion");
     }
@@ -77,6 +75,7 @@ function Login() {
                     className={`form-control ${error ? "is-invalid" : ""}`}
                     value={correo}
                     onChange={(e) => setCorreo(e.target.value)}
+                    onFocus={() => error && setError("")}
                   />
                 </div>
 
@@ -90,6 +89,7 @@ function Login() {
                     className={`form-control ${error ? "is-invalid" : ""}`}
                     value={contrasena}
                     onChange={(e) => setContrasena(e.target.value)}
+                    onFocus={() => error && setError("")}
                   />
                 </div>
 
