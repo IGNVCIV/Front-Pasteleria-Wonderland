@@ -26,7 +26,11 @@ function Contacto() {
   const handleSubmit = (e) => {
     e.preventDefault();
     formRef.current.classList.add('was-validated');
-    if (!form.nombre.trim()) return setAlert("Ingresa tu nombre");
+    if (!form.nombre.trim()) {
+        return setAlert("Ingresa tu nombre");
+      } else if (/\d/.test(form.nombre)) {
+        return setAlert("El nombre no puede contener números");
+      }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.correo)) return setAlert("Correo inválido");
     if (form.mensaje.trim().length < 5) return setAlert("Escribe un mensaje más largo");
 
