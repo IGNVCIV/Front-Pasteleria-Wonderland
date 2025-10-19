@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function TopProductosCriticos() {
+function TopProductos() {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
@@ -74,4 +74,4 @@ function TopProductosCriticos() {
   );
 }
 
-export default TopProductosCriticos;
+export default TopProductos;

@@ -5,12 +5,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: 'jsdom', // Simula un entorno de navegador para poder probar componentes React
-    globals: true,        // Permite usar funciones como test(), expect(), etc. sin importarlas en cada archivo
-    //setupFiles: './src/setupTests.ts', // Archivo donde puedes configurar cosas globales para tus tests (como jest-dom)
-    coverage: {
-      provider: 'v8',          // Usa el motor de cobertura de código de V8 (gracias a @vitest/coverage-v8)
-      reportsDirectory: './coverage', // Carpeta donde se guardarán los reportes de cobertura
-    },
+  environment: 'jsdom',
+  globals: true,
+  setupFiles: './src/tests/setuptests.jsx',
+  include: ['src/tests/**/*.test.jsx'], // 👈 Esto es lo que falta
+  coverage: {
+    provider: 'v8',
+    reportsDirectory: './coverage',
   },
-})
+}
+
+});

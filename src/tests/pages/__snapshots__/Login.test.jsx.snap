@@ -1,0 +1,129 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Componente Login > coincide con el snapshot actual 1`] = `
+<div>
+  <div
+    class="login-page vh-100 d-flex flex-column"
+  >
+    <header>
+      <nav
+        class="nav"
+      >
+        <a
+          data-discover="true"
+          href="/"
+        >
+          <img
+            alt="Pastelería Wonderland"
+            class="logo-img"
+            src="/assets/img/Logos/Header.png"
+          />
+        </a>
+      </nav>
+    </header>
+    <main>
+      <div
+        class="wrap"
+        id="Login"
+      >
+        <div
+          class="card shadow-sm"
+        >
+          <div
+            class="card-body"
+          >
+            <h2>
+              Inicio de Sesión
+              <span
+                class="title-underline"
+              />
+            </h2>
+            <form
+              novalidate=""
+            >
+              <div
+                class="field mb-3"
+              >
+                <label
+                  class="label"
+                  for="correo"
+                >
+                  CORREO
+                </label>
+                <input
+                  class="form-control "
+                  id="correo"
+                  type="email"
+                  value=""
+                />
+              </div>
+              <div
+                class="field mb-2"
+              >
+                <label
+                  class="label"
+                  for="contrasena"
+                >
+                  CONTRASEÑA
+                </label>
+                <input
+                  class="form-control "
+                  id="contrasena"
+                  type="password"
+                  value=""
+                />
+              </div>
+              <div
+                class="links mb-3 text-end"
+              >
+                <a
+                  class="small text-decoration-none"
+                  href="#"
+                >
+                  ¿Olvidaste tu contraseña?
+                </a>
+              </div>
+              <div
+                class="actions d-flex gap-2"
+              >
+                <button
+                  class="btn btn-primary flex-grow-1"
+                  type="submit"
+                >
+                  Acceder
+                </button>
+                <button
+                  class="btn btn-outline flex-grow-1"
+                  type="button"
+                >
+                  Crear cuenta
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="mt-auto py-3"
+      id="site-footer-login"
+    >
+      <div
+        class="footer-content text-center"
+      >
+        <p
+          class="mb-1"
+        >
+          © Pastelería Wonderland — 2025
+        </p>
+        <a
+          class="small text-decoration-none"
+          href="#"
+        >
+          Política de privacidad
+        </a>
+      </div>
+    </footer>
+  </div>
+</div>
+`;

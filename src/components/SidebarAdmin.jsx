@@ -10,17 +10,28 @@ function SidebarAdmin({
   abrirPerfil
 }) {
   return (
+    
     <div
-      className={`offcanvas offcanvas-end ${visible ? "show" : ""}`}
-      style={{ 
-        visibility: visible ? "visible" : "hidden",
-        width: "280px" // ancho reducido (por defecto es ~320px)
-      }}
-    >
+  data-testid="sidebar-admin"  // <- aquí
+  className={`offcanvas offcanvas-end ${visible ? "show" : ""}`}
+  style={{ 
+    visibility: visible ? "visible" : "hidden",
+    width: "280px"
+  }}
+>
+
       <div className="offcanvas-header">
         <h5 className="offcanvas-title">Cuenta</h5>
-        <button className="btn-close" onClick={toggleOffcanvas}></button>
+       <button
+  className="btn-close"
+  onClick={toggleOffcanvas}
+  aria-label="Cerrar barra"
+/>
+
       </div>
+
+      
+      
 
       <div className="offcanvas-body d-flex flex-column p-0">
         {/* Inicio */}

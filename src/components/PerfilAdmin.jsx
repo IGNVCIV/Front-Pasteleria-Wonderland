@@ -1,8 +1,6 @@
 // src/components/PerfilAdmin.jsx
 import { useState } from "react";
 
-
-
 function PerfilAdmin() {
   const admin = {
     nombre: "Taylor Swift",
@@ -25,7 +23,7 @@ function PerfilAdmin() {
   };
 
   return (
-    <div className="card shadow-sm p-4">
+    <div className="card shadow-sm p-4" data-testid="perfil-admin">
       <h2 className="h5 mb-3">Perfil Administrador</h2>
       <p className="text-muted mb-4">
         Administra tu información de contacto y credenciales principales.

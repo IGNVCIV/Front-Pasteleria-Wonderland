@@ -9,7 +9,6 @@ function BandejaContacto() {
       .then((res) => res.json())
       .then((data) => {
         if (!data || data.length === 0) {
-          // mensaje de ejemplo
           setMensajes([
             {
               fecha: new Date().toLocaleDateString(),
@@ -24,8 +23,7 @@ function BandejaContacto() {
           setMensajes(data);
         }
       })
-      .catch((err) => {
-        console.error("Error cargando mensajes:", err);
+      .catch(() => {
         setMensajes([
           {
             fecha: new Date().toLocaleDateString(),
@@ -64,11 +62,7 @@ function BandejaContacto() {
                   <td>{m.nombre}</td>
                   <td>{m.correo}</td>
                   <td>{m.orden || "-"}</td>
-                  <td>
-                    {m.mensaje.length > 50
-                      ? m.mensaje.substring(0, 50) + "..."
-                      : m.mensaje}
-                  </td>
+                  <td>{m.mensaje.length > 50 ? m.mensaje.substring(0, 50) + "..." : m.mensaje}</td>
                   <td>
                     <button
                       className="btn btn-sm btn-outline-primary"
@@ -84,7 +78,6 @@ function BandejaContacto() {
         </div>
       </div>
 
-      {/* Modal simple */}
       {mensajeSeleccionado && (
         <div
           style={{

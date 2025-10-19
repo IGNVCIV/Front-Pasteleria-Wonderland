@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Admin Component > coincide con el snapshot actual 1`] = `
+<div>
+  <div
+    class="admin-container"
+  >
+    <header
+      data-testid="header-admin"
+    >
+      HeaderAdmin
+    </header>
+    <aside
+      data-testid="sidebar-admin"
+    >
+      SidebarAdmin 
+      oculto
+    </aside>
+    <main
+      class="px-3 px-md-4 mt-3"
+    >
+      <section
+        data-testid="bandeja-contacto"
+      >
+        BandejaContacto
+      </section>
+    </main>
+  </div>
+</div>
+`;

@@ -14,7 +14,6 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
     fecha_nacimiento: "",
   });
 
-  // Inicializar datos si es edición
   useEffect(() => {
     if (empleadoEdit) {
       setFormData(empleadoEdit);
@@ -40,7 +39,7 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault(); // evita recargar la página
+    e.preventDefault();
     handleGuardar(formData);
   };
 
@@ -50,8 +49,9 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
       <form onSubmit={onSubmit}>
         <div className="row g-2">
           <div className="col-md-4">
-            <label className="form-label">RUT</label>
+            <label htmlFor="rut" className="form-label">RUT</label>
             <input
+              id="rut"
               name="rut"
               type="text"
               className="form-control"
@@ -62,8 +62,9 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">DV</label>
+            <label htmlFor="dv" className="form-label">DV</label>
             <input
+              id="dv"
               name="dv"
               type="text"
               className="form-control"
@@ -74,8 +75,9 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
             />
           </div>
           <div className="col-md-6">
-            <label className="form-label">Nombres</label>
+            <label htmlFor="nombres" className="form-label">Nombres</label>
             <input
+              id="nombres"
               name="nombres"
               type="text"
               className="form-control"
@@ -86,11 +88,11 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
           </div>
         </div>
 
-        {/* Apellidos y correo */}
         <div className="row g-2 mt-2">
           <div className="col-md-4">
-            <label className="form-label">Apellido 1</label>
+            <label htmlFor="apellido1" className="form-label">Apellido 1</label>
             <input
+              id="apellido1"
               name="apellido1"
               type="text"
               className="form-control"
@@ -100,8 +102,9 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
             />
           </div>
           <div className="col-md-4">
-            <label className="form-label">Apellido 2</label>
+            <label htmlFor="apellido2" className="form-label">Apellido 2</label>
             <input
+              id="apellido2"
               name="apellido2"
               type="text"
               className="form-control"
@@ -111,8 +114,9 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
             />
           </div>
           <div className="col-md-4">
-            <label className="form-label">Correo</label>
+            <label htmlFor="correo" className="form-label">Correo</label>
             <input
+              id="correo"
               name="correo"
               type="email"
               className="form-control"
@@ -123,11 +127,11 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
           </div>
         </div>
 
-        {/* Teléfono y cargo */}
         <div className="row g-2 mt-2">
           <div className="col-md-6">
-            <label className="form-label">Teléfono</label>
+            <label htmlFor="telefono" className="form-label">Teléfono</label>
             <input
+              id="telefono"
               name="telefono"
               type="text"
               className="form-control"
@@ -136,8 +140,9 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
             />
           </div>
           <div className="col-md-6">
-            <label className="form-label">Cargo</label>
+            <label htmlFor="cargo" className="form-label">Cargo</label>
             <input
+              id="cargo"
               name="cargo"
               type="text"
               className="form-control"
@@ -147,10 +152,10 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
           </div>
         </div>
 
-        {/* Dirección y fecha de nacimiento */}
         <div className="mt-2">
-          <label className="form-label">Dirección</label>
+          <label htmlFor="direccion" className="form-label">Dirección</label>
           <input
+            id="direccion"
             name="direccion"
             type="text"
             className="form-control"
@@ -159,8 +164,9 @@ function EmpleadoForm({ empleadoEdit, handleGuardar, cancelar }) {
           />
         </div>
         <div className="mt-2">
-          <label className="form-label">Fecha de nacimiento</label>
+          <label htmlFor="fecha_nacimiento" className="form-label">Fecha de nacimiento</label>
           <input
+            id="fecha_nacimiento"
             name="fecha_nacimiento"
             type="date"
             className="form-control"
