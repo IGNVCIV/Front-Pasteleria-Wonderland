@@ -6,7 +6,8 @@ export default function NoticiaHome() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const API_KEY = "71a7428258ef478daa17af3c1b1ef133";
+    //const API_KEY = "71a7428258ef478daa17af3c1b1ef133";
+    const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
     const URL = `https://newsapi.org/v2/everything?q=repostería&language=es&sortBy=publishedAt&apiKey=${API_KEY}`;
 
     const obtenerNoticias = async () => {
