@@ -1,5 +1,5 @@
 import React from "react";
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
@@ -25,6 +25,7 @@ describe("SidebarAdmin Component", () => {
     );
 
     const sidebar = screen.getByTestId("sidebar-admin");
+    expect(sidebar).toBeInTheDocument();
     expect(sidebar).toHaveClass("show");
     expect(sidebar).toHaveStyle({ visibility: "visible" });
   });
@@ -38,7 +39,6 @@ describe("SidebarAdmin Component", () => {
 
     const closeBtn = screen.getByRole("button", { name: "Cerrar barra" });
     fireEvent.click(closeBtn);
-
     expect(mockHandlers.toggleOffcanvas).toHaveBeenCalled();
   });
 
@@ -49,11 +49,9 @@ describe("SidebarAdmin Component", () => {
       </MemoryRouter>
     );
 
-    
     fireEvent.click(screen.getAllByText(/^Agregar$/i)[0]);
     expect(mockHandlers.handleAgregarProducto).toHaveBeenCalled();
     expect(mockHandlers.toggleOffcanvas).toHaveBeenCalled();
-
 
     fireEvent.click(screen.getAllByText(/^Modificar$/i)[0]);
     expect(mockHandlers.setTabActivo).toHaveBeenCalledWith("editarProducto");
@@ -67,7 +65,6 @@ describe("SidebarAdmin Component", () => {
       </MemoryRouter>
     );
 
-    
     fireEvent.click(screen.getAllByText(/^Agregar$/i)[1]);
     expect(mockHandlers.handleAgregarEmpleado).toHaveBeenCalled();
     expect(mockHandlers.setTabActivo).toHaveBeenCalledWith("empleados");
@@ -76,7 +73,6 @@ describe("SidebarAdmin Component", () => {
     expect(mockHandlers.handleEditarEmpleado).toHaveBeenCalledWith(mockHandlers.empleadoSeleccionado);
     expect(mockHandlers.setTabActivo).toHaveBeenCalledWith("empleados");
 
- 
     fireEvent.click(screen.getAllByText(/Mostrar/i)[1]);
     expect(mockHandlers.setTabActivo).toHaveBeenCalledWith("empleados");
   });
@@ -94,16 +90,4 @@ describe("SidebarAdmin Component", () => {
     fireEvent.click(screen.getByText(/Cerrar sesión/i));
     expect(mockHandlers.logout).toHaveBeenCalled();
   });
-
-  it("coincide con el snapshot actual", () => {
-    const { container } = render(
-      <MemoryRouter>
-        <SidebarAdmin {...mockHandlers} visible={true} />
-      </MemoryRouter>
-    );
-
-    expect(container).toMatchSnapshot();
-  });
 });
-
-

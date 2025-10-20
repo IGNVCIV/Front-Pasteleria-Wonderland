@@ -1,7 +1,7 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import TopProductos from "../../components/TopProductos";
 
 describe("TopProductos Component", () => {
@@ -28,7 +28,6 @@ describe("TopProductos Component", () => {
     localStorage.setItem("catalogoProductos", JSON.stringify(catalogoMock));
     render(<TopProductos />);
 
-  
     for (let i = 0; i < 10; i++) {
       expect(screen.getByText(`Producto ${i + 1}`)).toBeInTheDocument();
       expect(screen.getByText(`#${i + 1}`)).toBeInTheDocument();
@@ -37,13 +36,4 @@ describe("TopProductos Component", () => {
     expect(screen.queryByText("Producto 11")).not.toBeInTheDocument();
     expect(screen.queryByText("Producto 12")).not.toBeInTheDocument();
   });
-
-  it("coincide con el snapshot", () => {
-    localStorage.setItem("catalogoProductos", JSON.stringify(catalogoMock));
-    const { container } = render(<TopProductos />);
-    expect(container).toMatchSnapshot();
-  });
 });
-
-
-

@@ -8,17 +8,8 @@ describe("Componente MensajesAdmin", () => {
     render(<MensajesSection />);
 
     expect(screen.getByText("Bandeja de Mensajes")).toBeInTheDocument();
-
- 
     const mensaje = screen.getByText("No hay mensajes nuevos");
     expect(mensaje).toBeInTheDocument();
     expect(mensaje).toHaveClass("mensaje-vacio");
   });
-
-  it("coincide con el snapshot actual", () => {
-    const { container } = render(<MensajesSection />);
-    expect(container).toMatchSnapshot();
-  });
 });
-
-

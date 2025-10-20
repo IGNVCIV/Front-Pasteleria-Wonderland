@@ -4,9 +4,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import Login from "../../pages/Login";
 
-// === TESTS ===
 describe("Componente Login", () => {
-
   beforeEach(() => {
     localStorage.clear();
   });
@@ -19,6 +17,9 @@ describe("Componente Login", () => {
     );
 
     expect(screen.getByText(/Inicio de Sesión/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/CORREO/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/CONTRASEÑA/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Acceder/i })).toBeInTheDocument();
   });
 
   it("muestra error al ingresar credenciales incorrectas", () => {
@@ -28,13 +29,9 @@ describe("Componente Login", () => {
       </MemoryRouter>
     );
 
-    const inputCorreo = screen.getByLabelText(/CORREO/i);
-    const inputContrasena = screen.getByLabelText(/CONTRASEÑA/i);
-    const botonAcceder = screen.getByRole("button", { name: /Acceder/i });
-
-    fireEvent.change(inputCorreo, { target: { value: "mal@correo.com" } });
-    fireEvent.change(inputContrasena, { target: { value: "incorrecta" } });
-    fireEvent.click(botonAcceder);
+    fireEvent.change(screen.getByLabelText(/CORREO/i), { target: { value: "mal@correo.com" } });
+    fireEvent.change(screen.getByLabelText(/CONTRASEÑA/i), { target: { value: "incorrecta" } });
+    fireEvent.click(screen.getByRole("button", { name: /Acceder/i }));
 
     expect(screen.getByText("Usuario o contraseña incorrectos")).toBeInTheDocument();
   });
@@ -54,14 +51,15 @@ describe("Componente Login", () => {
     expect(localStorage.getItem("rol")).toBe("admin");
   });
 
-  it("coincide con el snapshot actual", () => {
-    const { container } = render(
+  it("renderiza correctamente los elementos clave del formulario", () => {
+    render(
       <MemoryRouter>
         <Login />
       </MemoryRouter>
     );
-    expect(container).toMatchSnapshot();
+
+    expect(screen.getByLabelText(/CORREO/i)).toBeEnabled();
+    expect(screen.getByLabelText(/CONTRASEÑA/i)).toBeEnabled();
+    expect(screen.getByRole("button", { name: /Acceder/i })).toBeEnabled();
   });
 });
-
-

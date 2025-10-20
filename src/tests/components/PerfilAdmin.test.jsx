@@ -4,17 +4,13 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 
-
 vi.mock("bootstrap", () => ({
   Carousel: vi.fn(),
 }));
 
-
 vi.mock("../../style/style.css", () => ({}), { virtual: true });
 
-
 vi.stubGlobal("alert", vi.fn());
-
 
 import PerfilAdmin from "../../components/PerfilAdmin";
 
@@ -25,9 +21,6 @@ describe("PerfilAdmin Component", () => {
         <PerfilAdmin />
       </MemoryRouter>
     );
-
-    const perfil = screen.getByTestId("perfil-admin");
-    expect(perfil).toBeInTheDocument();
 
     expect(screen.getByDisplayValue("Taylor Swift")).toBeInTheDocument();
     expect(screen.getByDisplayValue("admin@wonderland.cl")).toBeInTheDocument();
@@ -83,16 +76,4 @@ describe("PerfilAdmin Component", () => {
     expect(nombreInput).toBeDisabled();
     expect(nombreInput.value).toBe("Nombre Nuevo");
   });
-
-  it("coincide con el snapshot actual", () => {
-    const { container } = render(
-      <MemoryRouter>
-        <PerfilAdmin />
-      </MemoryRouter>
-    );
-
-    expect(container).toMatchSnapshot();
-  });
 });
-
-

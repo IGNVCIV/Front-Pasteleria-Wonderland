@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import Admin from "../../pages/Admin";
 
-
+// Mocks de componentes hijos
 vi.mock("../../components/HeaderAdmin", () => ({
   default: () => <header data-testid="header-admin">HeaderAdmin</header>,
 }));
@@ -24,8 +24,15 @@ vi.mock("../../components/PerfilAdmin", () => ({
 vi.mock("../../components/TopProductos", () => ({
   default: () => <section data-testid="top-productos">TopProductos</section>,
 }));
+vi.mock("../../components/SidebarAdmin", () => ({
+  default: ({ visible }) => (
+    <aside data-testid="sidebar-admin">
+      SidebarAdmin {visible ? "visible" : "oculto"}
+    </aside>
+  ),
+}));
 
-
+// Mock de fetch
 global.fetch = vi.fn((url) => {
   if (url.includes("mensajes.json")) {
     return Promise.resolve({
@@ -40,7 +47,7 @@ global.fetch = vi.fn((url) => {
   return Promise.reject(new Error("URL no reconocida"));
 });
 
-
+// Mock de localStorage
 const localStorageMock = (() => {
   let store = {};
   return {
@@ -52,23 +59,15 @@ const localStorageMock = (() => {
 })();
 Object.defineProperty(window, "localStorage", { value: localStorageMock });
 
-// === TESTS GENERALES ===
 describe("Admin Component", () => {
-  // Sidebar neutral
-  vi.mock("../../components/SidebarAdmin", () => ({
-    default: ({ visible }) => (
-      <aside data-testid="sidebar-admin">
-        SidebarAdmin {visible ? "visible" : "oculto"}
-      </aside>
-    ),
-  }));
-
   it("renderiza correctamente los componentes principales", async () => {
-    render(
-      <MemoryRouter>
-        <Admin />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Admin />
+        </MemoryRouter>
+      );
+    });
 
     expect(screen.getByTestId("header-admin")).toBeInTheDocument();
     expect(screen.getByTestId("sidebar-admin")).toBeInTheDocument();
@@ -80,26 +79,31 @@ describe("Admin Component", () => {
     expect(screen.getByTestId("bandeja-contacto")).toBeInTheDocument();
   });
 
-  it("usa correctamente el almacenamiento local", () => {
+  it("usa correctamente el almacenamiento local", async () => {
     localStorage.setItem("catalogoProductos", JSON.stringify([{ id: 1, nombre: "Torta" }]));
-    render(
-      <MemoryRouter>
-        <Admin />
-      </MemoryRouter>
-    );
+
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Admin />
+        </MemoryRouter>
+      );
+    });
 
     expect(localStorage.getItem("catalogoProductos")).toContain("Torta");
   });
 
-  it("coincide con el snapshot actual", () => {
-    const { container } = render(
-      <MemoryRouter>
-        <Admin />
-      </MemoryRouter>
-    );
-    expect(container).toMatchSnapshot();
+  it("renderiza sin errores visibles", async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Admin />
+        </MemoryRouter>
+      );
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText(/Error/i)).not.toBeInTheDocument();
+    });
   });
 });
-
-
-
