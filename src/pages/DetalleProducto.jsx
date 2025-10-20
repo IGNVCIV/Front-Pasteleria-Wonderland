@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef} from "react";
 import Catalogo from "../lib/Data_Catalogo";
 import { DESCRIPCIONES_PRODUCTOS } from "../lib/Descripcion";
 import AlertaSimple from "../components/AlertaSimple.jsx";
@@ -16,6 +16,7 @@ function DetalleProducto() {
   const producto = catalogo.find((p) => p.id.toString() === id);
   const descripcion = DESCRIPCIONES_PRODUCTOS[id];
   const [alerta, setAlerta] = useState({ msg: "", type: "" });
+  const redirigido = useRef(false);
 
   if (!catalogo || catalogo.length === 0) {
     return (
@@ -29,7 +30,8 @@ function DetalleProducto() {
     );
   }
 
-  if (!producto) {
+  if (!producto && !redirigido.current) {
+    redirigido.current = true;
     setAlerta({ msg: "Producto no encontrado", type: "danger" });
     navigate("/productos");
     return null;
@@ -83,17 +85,17 @@ function DetalleProducto() {
               <li className="breadcrumb-item">
                 <a href="/productos" className="text-decoration-none text-secondary">Productos</a>
               </li>
-              <li className="breadcrumb-item active text-dark" aria-current="page">
-                {producto.nombre}
-              </li>
+                <li className="breadcrumb-item active text-dark" aria-current="page">
+                  {producto?.nombre || "Producto"}
+                </li>
             </ol>
           </nav>
 
           <div className="row align-items-center g-5">
             <div className="col-lg-6 col-md-6 text-center">
               <img
-                src={producto.imagen}
-                alt={producto.nombre}
+                src={producto?.imagen}
+                alt={producto?.nombre}
                 className="img-fluid rounded-4 shadow"
                 style={{
                   maxHeight: "480px",
@@ -105,10 +107,10 @@ function DetalleProducto() {
 
             <div className="col-lg-6 col-md-6 text-center text-md-start">
               <h2 className="text-uppercase fw-bold display-5 mb-3" style={{ color: "#b1976b" }}>
-                {producto.nombre}
+                {producto?.nombre}
               </h2>
               <h4 className="fw-semibold mb-4" style={{ color: "#6c757d" }}>
-                ${producto.precio.toLocaleString()}
+                ${producto?.precio?.toLocaleString() || '0'}
               </h4>
                 <p
                 className="text-muted"
@@ -190,7 +192,7 @@ function DetalleProducto() {
           </div>
         </div>
       </div>
-      <Recomendados catalogo={catalogo} productoId={producto.id} />
+      <Recomendados catalogo={catalogo} productoId={producto?.id} />
       <Footer />
     </>
   );
