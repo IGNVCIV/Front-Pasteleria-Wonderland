@@ -8,6 +8,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import '../style/style.css';
 
+document.title = "Productos | Pastelería Wonderland";
+
 function Productos() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -212,9 +214,14 @@ function Productos() {
                   min="1"
                   max="8"
                   value={cantidad}
-                  onChange={(e) =>
-                    setCantidad(Math.min(Math.max(Number(e.target.value), 1), 8))
-                  }
+                  onChange={(e) => {
+                    const val = Math.max(1, Math.min(8, Number(e.target.value)));
+                    setCantidad(val);
+                  }}
+                  onInput={(e) => {
+                    if (e.target.value < 1) e.target.value = 1;
+                    if (e.target.value > 8) e.target.value = 8;
+                  }}
                   className="form-control w-50 mx-auto text-center"
                 />
               </div>

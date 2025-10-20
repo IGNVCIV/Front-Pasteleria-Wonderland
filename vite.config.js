@@ -17,6 +17,7 @@ export default defineConfig({
         'node_modules/',
         'src/tests/**',
         'dist/**',
+        'api/**', 
         'vite.config.js',
         'eslint.config.js',
         '**/__mocks__/**',

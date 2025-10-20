@@ -6,6 +6,8 @@ import Navbar from "../components/Navbar";
 import Footer from '../components/Footer.jsx';
 import CartItem from '../components/CartItem.jsx';
 
+document.title = "Carrito de compras | Pastelería Wonderland";
+
 function Carro(){
     const [cartItems, setCartItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);

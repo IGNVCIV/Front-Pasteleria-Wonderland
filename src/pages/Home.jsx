@@ -9,6 +9,8 @@ import DetalleProducto from './DetalleProducto';
 import NoticiaHome from "../components/NoticiaHome.jsx";
 import { Carousel } from "bootstrap";
 
+document.title = "Inicio | Pastelería Wonderland";
+
 function Home(){    
     const { catalogo } = Catalogo();
     const [topProductos, setTopProductos] = useState([]);

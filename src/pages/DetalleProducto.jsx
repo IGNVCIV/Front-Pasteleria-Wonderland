@@ -8,6 +8,8 @@ import Footer from "../components/Footer";
 import Recomendados from "../components/Recomendados";
 import "../style/style.css";
 
+document.title = "Detalle de producto | Pastelería Wonderland";
+
 function DetalleProducto() {
   const { id } = useParams();
   const { catalogo } = Catalogo();

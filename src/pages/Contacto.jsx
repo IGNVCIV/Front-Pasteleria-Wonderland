@@ -4,6 +4,8 @@ import AlertaSimple from "../components/AlertaSimple.jsx";
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer.jsx'
 
+document.title = "Contáctanos | Pastelería Wonderland";
+
 function Contacto() {
   const [form, setForm] = useState({ nombre:"", correo:"", orden:"", mensaje:"" });
   const [alert, setAlert] = useState(null);

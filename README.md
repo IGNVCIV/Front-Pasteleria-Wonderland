@@ -1,6 +1,18 @@
-# React + Vite
+# Pastelería Wonderland
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación desarrollada con **React + Vite** para simular una tienda de pastelería.
+
+### Funcionalidades principales
+- Carrito de compras con persistencia en localStorage.
+- Paginación y filtrado por categoría.
+- Validaciones en formularios y modales.
+- Actualización dinámica del contador del carrito.
+- Despliegue en **Vercel**.
+
+### Ejecución
+```bash
+npm install
+npm run dev
 
 Currently, two official plugins are available:
 
