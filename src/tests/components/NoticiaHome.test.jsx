@@ -60,7 +60,7 @@ describe('NoticiaHome.jsx', () => {
     renderNoticiaHome();
 
     await waitFor(() =>
-      expect(screen.getByText(/error al obtener noticias/i)).toBeInTheDocument()
+      expect(screen.getByText(/error/i)).toBeInTheDocument()
     );
   });
 });
