@@ -33,10 +33,7 @@ export default function AlertaSimple({ message, type = "info", onClose }) {
       >
         <span style={{ flex: 1, marginRight: "10px" }}>{message}</span>
         <button
-          onClick={() => {
-            setVisible(false);
-            setTimeout(onClose, 300);
-          }}
+          onClick={() => setTimeout(onClose, 300)}
           style={{
             background: "transparent",
             border: "none",
