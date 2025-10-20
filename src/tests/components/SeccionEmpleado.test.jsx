@@ -39,8 +39,8 @@ describe("SeccionEmpleados Component", () => {
 
   it("muestra el formulario al hacer clic en 'Modificar' si hay empleado seleccionado", () => {
     render(<SeccionEmpleados empleados={empleadosMock} setEmpleados={vi.fn()} />);
-    fireEvent.click(screen.getByText("Felipe")); // selecciona el empleado
-    fireEvent.click(screen.getByText("Modificar")); // activa el formulario
+    fireEvent.click(screen.getByText("Felipe")); 
+    fireEvent.click(screen.getByText("Modificar")); 
     expect(screen.getByTestId("formulario-empleado")).toBeInTheDocument();
   });
 });
