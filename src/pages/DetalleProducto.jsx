@@ -65,6 +65,7 @@ function DetalleProducto() {
     }
 
     localStorage.setItem("cart", JSON.stringify(carritoActual));
+    window.dispatchEvent(new Event("cartUpdated"));
     setAlerta({
         msg: `${producto.nombre} agregado al carrito (${cantidad} unidad${cantidad > 1 ? "es" : ""})`,
         type: "success",

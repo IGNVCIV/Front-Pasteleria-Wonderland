@@ -10,14 +10,19 @@ function Navbar() {
     const total = storedCart.reduce((sum, item) => sum + item.cantidad, 0);
     setCartCount(total);
 
-    // Si quieres actualizar dinámicamente cuando cambie el carrito
     const handleStorageChange = () => {
       const updated = JSON.parse(localStorage.getItem("cart")) || [];
       const totalUpdated = updated.reduce((sum, item) => sum + item.cantidad, 0);
       setCartCount(totalUpdated);
     };
     window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+
+    window.addEventListener("cartUpdated", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("cartUpdated", handleStorageChange);
+    };
   }, []);
 
   return (

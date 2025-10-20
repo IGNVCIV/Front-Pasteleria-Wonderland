@@ -109,6 +109,7 @@ function Productos() {
       });
     }
     localStorage.setItem("cart", JSON.stringify(carritoActual));
+    window.dispatchEvent(new Event("cartUpdated"));
     setMostrarModal(false);
   };
 
