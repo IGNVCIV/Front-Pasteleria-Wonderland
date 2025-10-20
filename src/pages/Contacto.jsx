@@ -25,16 +25,46 @@ function Contacto() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formRef.current.classList.add('was-validated');
-    if (!form.nombre.trim()) {
-        return setAlert("Ingresa tu nombre");
-      } else if (/\d/.test(form.nombre)) {
-        return setAlert("El nombre no puede contener números");
-      }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.correo)) return setAlert("Correo inválido");
-    if (form.mensaje.trim().length < 5) return setAlert("Escribe un mensaje más largo");
+    const formEl = formRef.current;
+    formEl.classList.add("was-validated");
 
-    // Guardar en localStorage
+    let valido = true;
+
+    const inputNombre = formEl.querySelector("#nombre");
+    if (!form.nombre.trim()) {
+      inputNombre.setCustomValidity("Ingresa tu nombre");
+      setAlert("Ingresa tu nombre");
+      valido = false;
+    } else if (/\d/.test(form.nombre)) {
+      inputNombre.setCustomValidity("El nombre no puede contener números");
+      setAlert("El nombre no puede contener números");
+      valido = false;
+    } else {
+      inputNombre.setCustomValidity("");
+    }
+
+    const inputCorreo = formEl.querySelector("#correo");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.correo)) {
+      inputCorreo.setCustomValidity("Correo inválido");
+      setAlert("Correo inválido");
+      valido = false;
+    } else {
+      inputCorreo.setCustomValidity("");
+    }
+
+    const inputMensaje = formEl.querySelector("#mensaje");
+    if (form.mensaje.trim().length < 5) {
+      inputMensaje.setCustomValidity("Escribe un mensaje más largo");
+      setAlert("Escribe un mensaje más largo");
+      valido = false;
+    } else {
+      inputMensaje.setCustomValidity("");
+    }
+
+    if (!valido || !formEl.checkValidity()) {
+      return;
+    }
+
     const prev = JSON.parse(localStorage.getItem("pw_contactos") || "[]");
     const last = prev[prev.length - 1];
     if (last && Date.now() - new Date(last.fecha).getTime() < 60_000) {
@@ -45,13 +75,24 @@ function Contacto() {
       return;
     }
 
+    const nuevoMensaje = {
+      ...form,
+      fecha: new Date().toISOString(),
+    };
+    prev.push(nuevoMensaje);
+    localStorage.setItem("pw_contactos", JSON.stringify(prev));
+
     setAlerta({
       msg: "¡Mensaje enviado! Te responderemos pronto.",
       type: "success",
     });
-    setForm({ nombre:"", correo:"", orden:"", mensaje:"" });
+    setAlert(null);
+
+    setForm({ nombre: "", correo: "", orden: "", mensaje: "" });
+    formEl.reset();
+    formEl.classList.remove("was-validated");
   };
-    
+
   return (
     <>
     <Navbar />
