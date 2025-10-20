@@ -131,3 +131,10 @@ function SeccionEmpleados({ empleados, setEmpleados }) {
 }
 
 export default SeccionEmpleados;
+
+
+
+
+
+
+
