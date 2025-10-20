@@ -5,33 +5,32 @@ export default function NoticiaHome() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
     //const API_KEY = "71a7428258ef478daa17af3c1b1ef133";
-    const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-    const URL = `https://newsapi.org/v2/everything?q=repostería&language=es&sortBy=publishedAt&apiKey=${API_KEY}`;
-
-    const obtenerNoticias = async () => {
+  useEffect(() => {
+    const fetchNoticias = async () => {
       try {
-        const res = await fetch(URL);
-        if (!res.ok) throw new Error("Error al obtener noticias");
-        const data = await res.json();
-        setNoticias(data.articles.slice(0, 9));
-      } catch (err) {
-        setError(err.message);
+        const response = await fetch('/api/noticias');
+        if (!response.ok) throw new Error('Error al obtener noticias');
+        const data = await response.json();
+        setNoticias(data.articles || []);
+      } catch (error) {
+        console.error(error);
+        setError(error.message);
       } finally {
         setCargando(false);
       }
     };
-
-    obtenerNoticias();
+    fetchNoticias();
   }, []);
+
 
   if (cargando)
     return <p className="text-center my-4">Cargando dulces noticias...</p>;
   if (error)
     return <p className="text-center text-danger">Error: {error}</p>;
+  if (!cargando && noticias.length === 0 && !error)
+  return <p className="text-center my-4">No hay noticias disponibles en este momento.</p>;
 
-  // Agrupar las noticias en grupos de 3 para cada slide
   const grupos = [];
   for (let i = 0; i < noticias.length; i += 3) {
     grupos.push(noticias.slice(i, i + 3));
