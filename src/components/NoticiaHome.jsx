@@ -9,8 +9,14 @@ export default function NoticiaHome() {
   useEffect(() => {
     const fetchNoticias = async () => {
       try {
-        const response = await fetch('/api/noticias');
-        if (!response.ok) throw new Error('Error al obtener noticias');
+        const response = await fetch(
+          import.meta.env.DEV
+            ? `https://newsapi.org/v2/everything?q=pastelería&language=es&pageSize=9&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+             : "/api/noticias"
+        );
+
+        if (!response.ok) throw new Error("Error al obtener noticias");
+
         const data = await response.json();
         setNoticias(data.articles || []);
       } catch (error) {
@@ -20,9 +26,9 @@ export default function NoticiaHome() {
         setCargando(false);
       }
     };
+
     fetchNoticias();
   }, []);
-
 
   if (cargando)
     return <p className="text-center my-4">Cargando dulces noticias...</p>;
