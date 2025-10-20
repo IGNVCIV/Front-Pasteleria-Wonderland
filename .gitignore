@@ -2,7 +2,6 @@
 coverage/
 
 /build
-/dist
 
 .DS_Store
 .env
