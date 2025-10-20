@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "checkJs": false
+    "checkJs": false,
+    "types": []
   },
   "include": ["src"],
   "exclude": ["node_modules"]
