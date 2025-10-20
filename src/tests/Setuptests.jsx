@@ -17,3 +17,5 @@ vi.stubGlobal("fetch", vi.fn(() =>
     json: () => Promise.resolve(mockMensaje),
   })
 ));
+
+

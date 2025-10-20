@@ -29,3 +29,4 @@ const renderProducto = () =>
 describe('Productos.jsx', () => {
     beforeEach(() => vi.clearAllMocks());
 })
+

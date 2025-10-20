@@ -44,3 +44,5 @@ describe("SeccionEmpleados Component", () => {
     expect(screen.getByTestId("formulario-empleado")).toBeInTheDocument();
   });
 });
+
+

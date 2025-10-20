@@ -30,3 +30,5 @@ describe("NavbarAdmin Component", () => {
     expect(mockToggle).toHaveBeenCalledTimes(1);
   });
 });
+
+
