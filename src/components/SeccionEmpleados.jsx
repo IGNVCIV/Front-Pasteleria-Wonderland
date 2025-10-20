@@ -2,7 +2,7 @@ import { useState } from "react";
 import EmpleadoForm from "./FormularioEmpleado";
 
 function SeccionEmpleados({ empleados, setEmpleados }) {
-  const [accion, setAccion] = useState("mostrar"); // "mostrar", "agregar", "editar"
+  const [accion, setAccion] = useState("mostrar");
   const [empleadoEdit, setEmpleadoEdit] = useState(null);
 
   const iniciarAgregar = () => {
@@ -19,20 +19,25 @@ function SeccionEmpleados({ empleados, setEmpleados }) {
   const cancelar = () => setAccion("mostrar");
 
   const handleGuardarEmpleado = (empleado) => {
+    const empleadoConApellidos = {
+      ...empleado,
+      apellidos: `${empleado.apellido1} ${empleado.apellido2}`.trim(),
+    };
+
     if (accion === "editar") {
       setEmpleados(
-        empleados.map((e) => (e.rut === empleado.rut ? empleado : e))
+        empleados.map((e) => (e.rut === empleado.rut ? empleadoConApellidos : e))
       );
     } else {
-      setEmpleados([...empleados, empleado]);
+      setEmpleados([...empleados, empleadoConApellidos]);
     }
-    setEmpleadoEdit(empleado); // Mantener seleccionado
-    setAccion("editar"); // Mantener formulario abierto
+
+    setEmpleadoEdit(empleadoConApellidos);
+    setAccion("editar");
   };
 
   return (
     <div className="d-flex">
-      {/* Formulario tipo panel lateral */}
       {(accion === "agregar" || accion === "editar") && (
         <div
           className="bg-white shadow-sm p-3 border rounded flex-shrink-0"
@@ -51,7 +56,6 @@ function SeccionEmpleados({ empleados, setEmpleados }) {
         </div>
       )}
 
-      {/* Contenido principal: tabla */}
       <div className="flex-grow-1 ms-3">
         <h2 className="h4 mb-3">Administración de Empleados</h2>
 
