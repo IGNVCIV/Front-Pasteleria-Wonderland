@@ -1,3 +1,4 @@
+//const API_KEY = "71a7428258ef478daa17af3c1b1ef133";
 import { useState, useEffect } from "react";
 
 export default function NoticiaHome() {
@@ -5,23 +6,35 @@ export default function NoticiaHome() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
-    //const API_KEY = "71a7428258ef478daa17af3c1b1ef133";
   useEffect(() => {
     const fetchNoticias = async () => {
       try {
         const response = await fetch(
           import.meta.env.DEV
             ? `https://newsapi.org/v2/everything?q=pastelería&language=es&pageSize=9&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
-             : "/api/noticias"
+            : "/api/noticia"
         );
 
-        if (!response.ok) throw new Error("Error al obtener noticias");
+        if (!response.ok) {
+          throw new Error("No se pudieron obtener las noticias");
+        }
 
-        const data = await response.json();
-        setNoticias(data.articles || []);
+        let data;
+        try {
+          data = await response.json();
+        } catch {
+          console.warn("Respuesta no válida o vacía del servidor");
+          data = { articles: [] };
+        }
+
+        if (!data.articles || !Array.isArray(data.articles) || data.articles.length === 0) {
+          setNoticias([]);
+        } else {
+          setNoticias(data.articles);
+        }
       } catch (error) {
-        console.error(error);
-        setError(error.message);
+        console.error("Error cargando noticias:", error);
+        setError("No hay noticias disponibles en este momento.");
       } finally {
         setCargando(false);
       }
@@ -30,12 +43,10 @@ export default function NoticiaHome() {
     fetchNoticias();
   }, []);
 
-  if (cargando)
-    return <p className="text-center my-4">Cargando dulces noticias...</p>;
-  if (error)
-    return <p className="text-center text-danger">Error: {error}</p>;
-  if (!cargando && noticias.length === 0 && !error)
-  return <p className="text-center my-4">No hay noticias disponibles en este momento.</p>;
+  if (cargando) return <p className="text-center my-4">Cargando dulces noticias...</p>;
+  if (error) return <p className="text-center text-muted">{error}</p>;
+  if (!cargando && noticias.length === 0)
+    return <p className="text-center my-4 text-muted">No hay noticias disponibles en este momento.</p>;
 
   const grupos = [];
   for (let i = 0; i < noticias.length; i += 3) {
@@ -119,4 +130,3 @@ export default function NoticiaHome() {
     </section>
   );
 }
-    
