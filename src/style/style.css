@@ -3,6 +3,7 @@
 @import 'components/carousel.css';
 @import 'components/forms.css';
 @import 'components/siderbar.css';
+@import 'components/loader.css';
 
 @import 'core/base.css';
 @import 'core/layout.css';

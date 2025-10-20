@@ -36,7 +36,7 @@ function Navbar() {
               <Link to="/productos" className="text-decoration-none">Productos ▾</Link>
               <button className="submenu-toggle">▾</button>
                 <ul className="sub-menu">
-                <li className="menu-item"><Link to="/productos?categoria=Tortas Cuadradas">Tortas Cuadradas</Link></li>
+                <li className="menu-item"><Link to="/productos?categoria=Tortas Cuadradas" >Tortas Cuadradas</Link></li>
                 <li className="menu-item"><Link to="/productos?categoria=Tortas Circulares">Tortas Circulares</Link></li>
                 <li className="menu-item"><Link to="/productos?categoria=Postres Individuales">Postres</Link></li>
                 <li className="menu-item"><Link to="/productos?categoria=Pastelería Tradicional">Pastelería Tradicional</Link></li>

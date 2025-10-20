@@ -51,8 +51,9 @@ header{
   transition:opacity .18s, transform .18s, visibility .18s;
   z-index:1000;
 }
-.sub-menu .menu-item a{ display:block; padding:10px 16px; color:var(--color-text); }
-.sub-menu .menu-item a:hover{ background:rgba(0,0,0,.05); }
+.sub-menu .menu-item a{ text-decoration: none;  display:block; padding:10px 16px; color:var(--color-text); }
+.sub-menu .menu-item a:hover{  text-decoration: none; 
+  color: #b1976b; }
 
 .menu-item.has-children:hover>.sub-menu,
 .menu-item.has-children:focus-within>.sub-menu,
